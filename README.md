@@ -1,2 +1,4 @@
-# n-how_to_write_latex_report
-How to write a mathematical report with LaTeX
+# LaTeXを使ったレポートの作成のメモ
+
+卒業論文とか修士論文とかのようなレポートを書く際に必要となる諸々に関する技術的なことなどをまとめたもの.
+
