@@ -13,7 +13,8 @@ all: pdf
 dvi: ${TEXFILE}.dvi
 pdf: ${TEXFILE}.pdf
 
-${TEXFILE}.dvi: ${TEXFILE}.tex ${MAINTEXFILES} ${TEXFILE}.bbl ${TEXFILE}.ind
+#${TEXFILE}.dvi: ${TEXFILE}.tex ${MAINTEXFILES} ${TEXFILE}.bbl ${TEXFILE}.ind
+${TEXFILE}.dvi: ${TEXFILE}.tex ${MAINTEXFILES} ${TEXFILE}.bbl
 	${LATEX} ${TEXFILE} && ${LATEX} ${TEXFILE}
 
 ${TEXFILE}.pdf: ${TEXFILE}.dvi
