@@ -5,6 +5,29 @@
 
 \chapter{技術的な注意}
 
+
+\section{図について}
+最終的には, Tikzなりなんなりを使い
+十分な解像度をもってきれいに描かれた図を入れることになります.
+しかし, 図を実際に描くのは時間がかかる工程なので,
+最初の段階では図自体を入れる必要はありません.
+図を入れたほうが良い場所には,
+図を入れるスペースだけを用意する程度で十分で,
+それ以上のことをする必要はありません.
+今後, 改訂が進むうちに結局その図を使わないなどということも起こります.
+また, 紙面の都合で内容を精査する必要が出てきたときに,
+`せっかく時間をかけたから' などというナンセンスな理由で,
+削除しにくくなったりし, 不毛です.
+図は載せることが確定してから描くというので十分です.
+
+もしスペースを入れるだけではどんな図を入れようと思っていたか忘れそうな場合は,
+手書きで紙に図を描き
+それを写真にとったものを
+一時的に載せておけば良いです.
+
+いずれにせよ, 初期段階では図に時間をかけてはいけません.
+本文に注力すべきです.
+
 \section{句読点について}
 
 数式漢字かな混じりの技術的文書を書く場合,
@@ -166,18 +189,174 @@ $\varphi\colon X\to Y$のように非対称なスペーシングが
 \section{ソースの改行について}
 
 \section{段落について}
+段落を新しくするためには,
+空行を入れます.
+改行を\lstinline{\\}でいれるなどと言った真似をしてはいけません.
+また, 段落開始時にインデントをするのに,
+全角のスペースや\lstinline{\quad}などを入れてはいけません.
+インデントをどうするかなどは,
+スタイルで指定するべきことです.
+まずは内容に集中しましょう.
+
+\begin{remark}
+段落を指定する
+\lstinline{\par}というコマンドは, 空行で代用できます.
+(1行以上の空行は, \lstinline{\par}に置き換えられます).
+コマンドよりも空行のほうがソースの可読性が上がるので
+\lstinline{\par}は用いず空行を使います.
+\end{remark}
 
 \section{数式モードの適切な使用について}
 
 \section{定理環境について}
+定理などは, theorem環境などを定義しそれを使います.
+まずは, 以下をプリアンブルに入れます.
+\begin{lstlisting}
+\usepackage{amsthm}
+
+\begin{lstlisting}
+\theoremstyle{definition} 
+% section番号を入れる場合
+%\newtheorem{thm}{Theorem}[section]
+% 入れない場合
+\newtheorem{thm}{Theorem}
+
+\newtheorem{theorem}[thm]{定理}
+\newtheorem{lemma}[thm]{補題}
+\newtheorem{definition}[thm]{定義}
+\end{lstlisting}
+
+その上で,
+定義なら
+\begin{lstlisting}
+\begin{definition}
+....
+\end{definition}
+\end{lstlisting}
+のように書きます.
+定義なら
+\lstinline{theorem},
+補題なら
+\lstinline{lemma}
+をつかます.
+
+定理にタイトルを入れたい場合は
+\begin{lstlisting}
+\begin{theorem}[零点定理]
+...
+\end{theorem}
+\end{lstlisting}
+のように \lstinline{[]} で書きます.
+
+また, 証明は,
+\begin{lstlisting}
+\begin{proof}
+...
+\end{proof}
+\end{lstlisting}
+のようにproof環境を使います.
 
 \section{定義される用語の強調について}
+通常の数学書では,
+定義を書く際, 定義される用語を,
+イタリック(もしくはボールド)で強調する監修があります.
+定義される用語は
+\lstinline{\emph}
+で強調をしましょう.
+\begin{lstlisting}
+The pair is called a \emph{directed graph}.
+\end{lstlisting}
+のように使います.
+
+
+\begin{remark}
+強調のされ方はスタイルによって,
+イタリックであったりボールドであったりします.
+それらは, スタイルで指定することであって,
+内容をまとめるときに気にするべきことではありません.
+イタリックにするとかボールドにするとかではなく,
+強調を指示する
+\lstinline{\emph}
+を使います.
+\end{remark}
 
 \section{別組の数式モードについて/ナンバリング/インラインセンタリング}
 
 \section{スペースファクターについて}
+(数式ではない)本文中において,
+\lstinline{\\}による改行や
+\lstinline{\quad},
+\lstinline{\hspace},
+\lstinline{\hskip}などによる水平方向の空白,
+\lstinline{\vspace},
+\lstinline{\vskip}などによる垂直方向の空白は使いません.
+
+新しく段落を始めるときには,
+空行を入れます.
+数式を新しい行から始める場合は,
+別組の数式を使います.
+いずれにせよ, \lstinline{\\}などは使いません.
+
+\begin{remark}
+  本文中で使う可能性があるのは, \lstinline{\ }と\lstinline{\@}のみです.
+  これも非常に特殊な場合に使うものであって,
+  まず, ほとんどの場合に使うことはありません.
+  本文中でコマンドでスペースを挿入することはまずないと考えて良いと思います.
+
+  もしかしたら, 段落を変えたあとインデントをしたいなどと思うことが有るかもしれませんが, それらはスタイルで指定するべきものであって,
+  スペースをいちいち挿入して調整するものではありません.
+  内容に集中しましょう.
+\end{remark}
+
 
 \section{箇条書きについて}
+
+箇条書きは基本的には手書きをせず,
+コマンドを使って書きます.
+番号をふる場合は
+\begin{lstlisting}
+\begin{enumerate}
+\item .....
+\item ......
+\end{enumerate}
+\end{lstlisting}
+のようにします.
+番号を振らず点を打つだけなら,
+\begin{lstlisting}
+\begin{itemize}
+\item ....
+\item ......
+\end{itemize}
+\end{lstlisting}
+のようにします.
+
+見出し付きの箇条書きは,
+\begin{lstlisting}
+\begin{description}
+\item[Ax1] ....
+\item[Ax2] ......
+\end{description}
+\end{lstlisting}
+のようにします.
+\begin{remark}
+  箇条書きをするに当たって,
+  番号の振り方をローマ数字にしたいとか,
+  片側のみのカッコにしたいと,
+  思うことが有るかもしれません.
+それらは, スタイルで指定することであって,
+内容をまとめるときに気にするべきことではありません.
+そういう部分は気にせず,
+内容に集中しましょう.
+\end{remark}
+
+\section{別組数式の数式番号について}
+他で参照しないなら
+数式に番号は振りません.
+\lstinline{align}
+環境などではなく
+\lstinline{align*}
+を使いましょう.
+
 
 \section{レイアウトについて}
 
