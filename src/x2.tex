@@ -12,14 +12,24 @@
 \usepackage{tikz-cd}
 %\usepackage{showkeys}
 \AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
-
+\usepackage{color}
 \usepackage{multicol}
 %\usepackage{makeidx}
 %\makeindex
 
 \usepackage{listings}
 \usepackage{jlisting}
-
+\lstset{
+  language=TeX,
+  stringstyle=\ttfamily,
+  basicstyle=\ttfamily,
+  numbers=left,
+  numberstyle={\tiny\emph},
+  lineskip=0ex,
+  xrightmargin=4em,
+  xleftmargin=4em,
+  backgroundcolor={\color[gray]{.90}},
+}
 
 
 \usepackage{japaneseaddonamsthm}
@@ -416,7 +426,7 @@ nd{array}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{LaTeXでのレポートの書き方のメモ}
+\title{\LaTeX でのレポートの書き方のメモ}
 
 \author{Yasuhide NUMATA}
 %\address{Department of Mathematics, Hokkaido University, Sapporo, Japan.}
