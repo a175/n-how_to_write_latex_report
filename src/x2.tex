@@ -17,6 +17,7 @@
 %\usepackage{makeidx}
 %\makeindex
 
+
 \usepackage{listings}
 \usepackage{jlisting}
 \lstset{
@@ -31,6 +32,13 @@
   backgroundcolor={\color[gray]{.90}},
 }
 
+%\definecolor{mygray}{rgb}{0.8,0.8,0.8}
+%\usepackage{xpatch}
+%\makeatletter
+%\xpretocmd\lstinline{\Colorbox{mygray}\bgroup\appto\lst@DeInit{\egroup}}{}{}
+%\makeatother
+
+\newcommand{\mycode}[1]{\colorbox[gray]{.90}{\lstinline|#1|}}
 
 \usepackage{japaneseaddonamsthm}
 %\usepackage{numberedproof}
